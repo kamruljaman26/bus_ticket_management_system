@@ -1,61 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Login V8</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/favicon.ico') }}"/>
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/util.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+{% extends 'auth_base.html' %}
 
-</head>
-<body>
-	
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178">
-					<span class="login100-form-title">
-						Sign In
-					</span>
+{% block alert %}
+    {% if show_alret %}
+        <div class="alert alert-warning alert-">
+            {{ alret_message }}
+        </div>
+    {% endif %}
 
-					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-						<input class="input100" type="text" name="username" placeholder="Username">
-						<span class="focus-input100"></span>
-					</div>
+{% endblock %}
 
-					<div class="wrap-input100 validate-input" data-validate = "Please enter password">
-						<input class="input100" type="password" name="pass" placeholder="Password">
-						<span class="focus-input100"></span>
-					</div>
+{% block input_from %}
 
-					<div class="container-login100-form-btn">
-						<input type="submit" value="sign-in" class="login100-form-btn">
-						</input>
-					</div>
 
-					<div class="flex-col-c p-t-40 p-b-40">
+    <!-- FORM for SIGN-UP -->
+    <form class="login100-form validate-form p-l-55 p-r-55 p-t-150" action="{{ url_for('sign_in') }}" method="post">
+        <span class="login100-form-title">
+            Sign In
+        </span>
+
+        <!-- UserName: INPUT -->
+        <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+            <input id="phone_num" class="input100" type="text" name="phone_num" placeholder="Phone Number" required>
+        </div>
+
+        <!-- Password: INPUT -->
+        <div class="wrap-input100 validate-input" data-validate="Please enter password" >
+            <input id="password" class="input100" type="password" name="password" placeholder="Password" required>
+        </div>
+
+        <!-- SUBMIT: INPUT -->
+        <div class="container-login100-form-btn">
+            <button value="sign-in" class="login100-form-btn" onclick="loadDoc()">
+                Sign-In
+            </button>
+        </div>
+
+        <!-- SIGN-UP: BUTTON -->
+        <div class="flex-col-c p-t-40 p-b-40">
 						<span class="txt1 p-b-9">
 							Don’t have an account?
 						</span>
+            <a href="{{ url_for('sign_up') }}" class="txt3">
+                Sign up now
+            </a>
+        </div>
+    </form>
 
-						<a href="#" class="txt3">
-							Sign up now
-						</a>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	
-	
-<!--====================================== Java Script =======================================-->
-	<script src="{{ url_for('static', filename='vendor/bootstrap/js/popper.js') }}"></script>
-	<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/login.js') }}"></script>
-
-</body>
-</html>
+{% endblock %}

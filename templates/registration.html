@@ -1,0 +1,55 @@
+{% extends 'auth_base.html' %}
+
+{% block alert %}
+    {% if show_alret %}
+            <div class="alert alert-warning">
+             {{ alret_message }}
+            </div>
+    {% endif %}
+{% endblock %}
+
+{% block input_from %}
+
+    <!-- FORM for SIGN-UP -->
+    <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="{{ url_for('sign_up') }}" method="post">
+        <span class="login100-form-title">
+            Sign Up
+        </span>
+
+        <!-- User Name: INPUT -->
+        <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+            <input class="input100" type="text" name="full_name" placeholder="Full Name">
+        </div>
+
+        <!-- User Name: INPUT -->
+        <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+            <input class="input100" type="text" name="phone_num" placeholder="Phone Number">
+        </div>
+
+        <!-- Password: INPUT -->
+        <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter password">
+            <input class="input100" type="password" name="pass" placeholder="Password">
+        </div>
+
+        <!-- Password: INPUT -->
+        <div class="wrap-input100 validate-input" data-validate="Please enter password">
+            <input class="input100" type="password" name="confirm_pass" placeholder="Confirm Password">
+        </div>
+
+        <!-- SUBMIT: INPUT -->
+        <div class="container-login100-form-btn">
+            <input type="submit" value="sign-in" class="login100-form-btn">
+        </div>
+
+        <!-- SIGN-UP: BUTTON -->
+        <div class="flex-col-c p-t-40 p-b-40">
+            <span class="txt1 p-b-9">
+                Already have a account?
+            </span>
+            <a href="{{ url_for('sign_in') }}" class="txt3">
+                Sign In now
+            </a>
+        </div>
+
+    </form>
+{% endblock %}
