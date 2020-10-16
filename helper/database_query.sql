@@ -8,7 +8,7 @@ create database bus_ticket_management_system;
 
 -- CREATE TABLE user_info
 CREATE TABLE user_info(id INT(11) AUTO_INCREMENT UNIQUE,full_name VARCHAR(30) NOT NULL,
-phone_num varchar(14) NOT NULL,password varchar(15) NOT NULL, address VARCHAR(30),PRIMARY KEY(phone_num));
+phone_num varchar(14) NOT NULL,password varchar(100) NOT NULL, address VARCHAR(255),PRIMARY KEY(phone_num));
 
 -- INSERT INTO user_info
 INSERT INTO user_info(full_name, phone_num, password, address)

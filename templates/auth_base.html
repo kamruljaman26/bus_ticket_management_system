@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>	
-	<meta charset="UTF-8">
-
-	<title>Login</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/favicon.ico') }}"/>
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/util.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/favicon.ico') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/util.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    {% block header %}
+    {% endblock %}
 </head>
 <body>
 
-    {% block alert %}
-    {% endblock %}
+{% block alert %}
+{% endblock %}
 
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-                
-                <!-- From Block -->
-                {% block input_from %}
-                {% endblock %}
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
 
-			</div>
-		</div>
-	</div>
-	
-	
-	<!--====================================== Java Script =======================================-->
-	<script src="{{ url_for('static', filename='vendor/bootstrap/js/popper.js') }}"></script>
-	<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+            <!-- From Block -->
+            {% block input_from %}
+            {% endblock %}
+
+        </div>
+    </div>
+</div>
+
+
+<!--====================================== Java Script =======================================-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/popper.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 
 </body>
 </html>

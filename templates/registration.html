@@ -1,44 +1,61 @@
 {% extends 'auth_base.html' %}
 
+{#Include JS Script Or Anything in Header#}
+{% block header %}
+    <title>Sign-Up</title>
+    <script src="{{ url_for('static', filename='js/reg.js') }}"></script>
+{% endblock %}
+
+{# Alert Block in Body Section #}
 {% block alert %}
     {% if show_alret %}
-            <div class="alert alert-warning">
-             {{ alret_message }}
-            </div>
+        <div class="alert alert-warning">
+            {{ alret_message }}
+        </div>
     {% endif %}
 {% endblock %}
 
+{# Input-Block in Body Section #}
 {% block input_from %}
 
     <!-- FORM for SIGN-UP -->
-    <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="{{ url_for('sign_up') }}" method="post">
+    <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="{{ url_for('sign_up') }}"
+          onsubmit="return validateForm()" method="post">
         <span class="login100-form-title">
             Sign Up
         </span>
 
         <!-- User Name: INPUT -->
         <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-            <input class="input100" type="text" name="full_name" placeholder="Full Name">
+            <input class="input100" type="text" name="full_name" placeholder="Full Name" required>
         </div>
 
         <!-- User Name: INPUT -->
         <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-            <input class="input100" type="text" name="phone_num" placeholder="Phone Number">
+            <input class="input100" type="text" name="phone_num"
+                   placeholder="Phone Number" required>
         </div>
 
         <!-- Password: INPUT -->
         <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter password">
-            <input class="input100" type="password" name="pass" placeholder="Password">
+            <input id="password" class="input100" type="password"
+                   name="pass" placeholder="Password" required>
         </div>
 
         <!-- Password: INPUT -->
+        <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter password">
+            <input id="con_password" class="input100" type="password" name="confirm_pass"
+                   placeholder="Confirm Password" required>
+        </div>
+
+        <!-- Address: INPUT -->
         <div class="wrap-input100 validate-input" data-validate="Please enter password">
-            <input class="input100" type="password" name="confirm_pass" placeholder="Confirm Password">
+            <input class="input100" type="text" name="address" placeholder="Address" required>
         </div>
 
         <!-- SUBMIT: INPUT -->
         <div class="container-login100-form-btn">
-            <input type="submit" value="sign-in" class="login100-form-btn">
+            <input type="submit" value="SUBMIT" class="login100-form-btn">
         </div>
 
         <!-- SIGN-UP: BUTTON -->

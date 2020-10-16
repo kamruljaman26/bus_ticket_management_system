@@ -1,17 +1,22 @@
 {% extends 'auth_base.html' %}
 
+{#Include JS Script Or Anything in Header#}
+{% block header %}
+    <title>Sign-In</title>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}
+
+{# Alert Block in Body Section #}
 {% block alert %}
     {% if show_alret %}
         <div class="alert alert-warning alert-">
             {{ alret_message }}
         </div>
     {% endif %}
-
 {% endblock %}
 
+{# Input-Block in Body Section #}
 {% block input_from %}
-
-
     <!-- FORM for SIGN-UP -->
     <form class="login100-form validate-form p-l-55 p-r-55 p-t-150" action="{{ url_for('sign_in') }}" method="post">
         <span class="login100-form-title">
@@ -45,5 +50,4 @@
             </a>
         </div>
     </form>
-
 {% endblock %}
