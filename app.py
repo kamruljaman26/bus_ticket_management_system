@@ -2,8 +2,10 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import database as db
 from datetime import timedelta
 
+
 app = Flask(__name__)
-app.secret_key = 'asdfghjklppoiuytrewq'
+app.secret_key = 'asdfghjklppoiuytrewqasdfghjk' # secret_key session end-to-end ecription 
+app.permanent_session_lifetime = timedelta(days=1)
 
 
 # Handle Login
@@ -15,14 +17,20 @@ def sign_in():
         status = db.login_validation(phone_num=phone_num, password=password)
 
         # create session
-        session['user_name'] = str(status[2][0][1])
+        session['user_name'] = str(status[2][0][1])  # User Name
+        session['user_phone'] = str(status[2][0][2]) # User Phone Number
+        session['user_address'] = str(status[2][0][4]) # User Address
+        session.permanent = True
 
         if status[0]:
             return redirect(url_for('index'))
         else:
             return render_template('login.html', alret_message=status[1], show_alret=True)
     elif request.method == 'GET':
-        return render_template('login.html')
+        if 'user_phone' in session:
+            return redirect(url_for('index'))
+        else:
+            return render_template('login.html')
 
 
 # Handle Registration
@@ -44,19 +52,38 @@ def sign_up():
             return render_template('registration.html', show_alret=True, alret_message=message)
 
     elif request.method == 'GET':
-        return render_template('registration.html')
+        if 'user_name' in session:
+            full_name = session['user_name']
+            return render_template('index.html',full_name=full_name)
+        else:
+            return render_template('registration.html')
+
+
+# Logout & Delete Session Data
+@app.route('/log-out',methods=['GET', 'POST'])
+def log_out():
+    # Delete session data
+    session.pop('user_name', None)
+    session.pop('user_phone', None)
+    session.pop('user_address', None)
+    return redirect(url_for('sign_in'))
 
 
 # Home page with login
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    if 'user_name' in session:
+        return render_template('index.html')
+    else:
+        return redirect(url_for('sign_in'))
 
-# Home page with login
+
+# Avilable Bus List 
 @app.route('/bus-list', methods=['GET', 'POST'])
 def bus_list():
-    loooop = [0,1,2,3,4,5,6,7,8,9]
-    return render_template('bus_list.html',loooop=loooop)
+    if request.method == 'GET':
+        loooop = [0,1,2,3,4,5,6,7,8,9]
+        return render_template('bus_list.html',loooop=loooop)
 
 
 # Main Function

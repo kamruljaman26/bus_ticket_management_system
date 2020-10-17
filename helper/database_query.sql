@@ -22,9 +22,17 @@ CREATE TABLE `Bus_Info` (
 );
 
 INSERT INTO bus_info(name, bus_num) VALUES ('Hanif Enterprise', 'DH00112233');
+INSERT INTO bus_info(name, bus_num) VALUES ('Hanif Enterprise', 'DH00112247');
+INSERT INTO bus_info(name, bus_num) VALUES ('Hanif Enterprise', 'DH00112246');
 INSERT INTO bus_info(name, bus_num) VALUES ('Shyamoli SP', 'DH00112234');
+INSERT INTO bus_info(name, bus_num) VALUES ('Shyamoli SP', 'DH00112248');
+INSERT INTO bus_info(name, bus_num) VALUES ('Shyamoli SP', 'DH00112249');
 INSERT INTO bus_info(name, bus_num) VALUES ('NR Travels', 'DH00112244');
+INSERT INTO bus_info(name, bus_num) VALUES ('NR Travels', 'DH00112250');
+INSERT INTO bus_info(name, bus_num) VALUES ('NR Travels', 'DH00112251');
 INSERT INTO bus_info(name, bus_num) VALUES ('Shohagh Paribahan', 'DH00112245');
+INSERT INTO bus_info(name, bus_num) VALUES ('Shohagh Paribahan', 'DH00112252');
+INSERT INTO bus_info(name, bus_num) VALUES ('Shohagh Paribahan', 'DH001122453');
 
 SELECT * FROM bus_info;
 
@@ -53,6 +61,9 @@ CREATE TABLE `Destination` (
   foreign key(bus_num) references bus_info(bus_num)
 );
 
+INSERT INTO destination(`bus_num`, `form`, `to`, `start_time`, `duration`, `price`) VALUES ('DH00112233', 'Dhaka', 'Chittagong', '2020-10-19 8:00:00', 7.30, 700);
+INSERT INTO destination(`bus_num`, `form`, `to`, `start_time`, `duration`, `price`) VALUES ('DH00112234', 'Dhaka', 'Chittagong', '2020-10-19 9:00:00', 7.30, 700);
+
 ..............................................
 -- Bus Seat Info
 
@@ -63,9 +74,9 @@ CREATE TABLE `Seat_Info` (
   `phone_num` varchar(14),
   `ticket_id` INT(11),
   `bus_num` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`seat_id`),
   foreign key(bus_num) references bus_info(bus_num),
-  foreign key(ticket_id) references ticket(bus_num),
-  foreign key(phone_num) references user_info(bus_num)
+  foreign key(ticket_id) references ticket(ticket_id),
+  foreign key(phone_num) references user_info(phone_num)
 );
 
