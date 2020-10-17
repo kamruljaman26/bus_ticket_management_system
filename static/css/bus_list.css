@@ -1,0 +1,14 @@
+/* Bus List */
+.bus-card{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+/* Header */
+.all-bus-header{
+    font-size: 1.5em;
+    color: #1e62d8;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

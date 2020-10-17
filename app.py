@@ -52,6 +52,12 @@ def sign_up():
 def index():
     return render_template('index.html')
 
+# Home page with login
+@app.route('/bus-list', methods=['GET', 'POST'])
+def bus_list():
+    loooop = [0,1,2,3,4,5,6,7,8,9]
+    return render_template('bus_list.html',loooop=loooop)
+
 
 # Main Function
 if __name__ == '__main__':
