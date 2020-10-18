@@ -10,7 +10,6 @@
 
 <!-- Boday Bloack -->
 {% block body %}
-
 <!-- Navigaion Bar -->
 <nav class="navbar navbar-expand-md bg-light navbar-light">
     <!-- Logo TXT -->
@@ -27,17 +26,18 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{url_for('index')}}">Home</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url_for('my_ticket')}}">MyTicket</a>
+            </li>
         </ul>
 
         <!-- Right Side -->
         <ul class="navbar-nav ml-auto">
-            {% if full_name != None %}
             <li class="nav-item">
                 <a class="nav-link">Welcome, {{session['user_name']}}</a>
             </li>
-            {% endif %}
             <li class="nav-item">
-                <a class="nav-link" href="{{url_for('log_out')}}">Sign-Out</a>
+                <a class="nav-link" href="{{url_for('log_out')}}">SignOut</a>
             </li>
         </ul>
 
@@ -54,7 +54,8 @@
             <!-- Intro -->
             <div class="col-md-7 col-md-push-5">
                 <div class="booking-cta">
-                    <h1>Make your reservation</h1>
+                    <img src="{{url_for("static",filename="images/cover.png")}}" alt="Girl in a jacket" width="250" height="250">
+                    <h2>Make your reservation</h2>
                     <p>DeshTrip is a premium online booking portal which allows you to purchase tickets for </br>
                         various bus services,launch services, air tickets and events.</p>
                 </div>
@@ -64,15 +65,15 @@
             <div class="col-md-4 col-md-pull-7">
                 <div class="booking-form">
                     <h4>BOOK NOW</h4>
-                    <form action="{{ url_for('bus_list') }}" method="GET">
+                    <form action="{{ url_for('bus_list') }}" method="POST">
                         <!-- Destination From  -->
                         <div class="form-group">
                             <span class="form-label">FROM</span>
                             <select class="form-control" id="form-id" name="from">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                                <!-- FROM, Destination List -->
+                                {% for x in from_to_list['from'] %}
+                                <option>{{x}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
@@ -80,23 +81,23 @@
                         <div class="form-group">
                             <span class="form-label">TO</span>
                             <select class="form-control" id="to-id" name="to">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                                <!-- TO, Destination List -->
+                                {% for x in from_to_list['to'] %}
+                                <option>{{x}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
                         <!-- Date Input -->
                         <div class="form-group">
                             <span class="form-label">DATE</span>
-                            <input id="date-id" class="form-control" type="date" value="2020-10-18" name="date">
+                            <input id="date-id" class="form-control" type="date" value="2020-10-19" name="date">
                         </div>
 
                         <!-- Set Needed Seat  -->
                         <div class="form-group">
                             <span class="form-label">SEAT NEEDED?</span>
-                            <select class="form-control" id="set_needed" name="sellist1">
+                            <select class="form-control" id="set_needed" name="seat_needed">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -106,7 +107,8 @@
 
                         <!-- Submition Button -->
                         <div class="form-btn">
-                            <button class="btn btn-primary btn-block">Check availability</button>
+                            <button class="btn btn-primary btn-block">Check
+                                availability</button>
                         </div>
                     </form>
 
@@ -118,9 +120,21 @@
 </div>
 {% endblock %}
 
+
 <!-- Body Footer End -->
 {% block footer_js %}
 <script>
-$('#date-id').datepicker({format:'dd/mm/yyyy',}).datepicker("setDate",'now');
+    // Check From Validation
+    function validateForm() {
+        let password = document.getElementById("from").value;
+        let con_password = document.getElementById("to").value;
+
+        if (password === con_password) {
+            alert("FROM & TO Should diffrent!, Please try again.")
+            return false
+        } else {
+            return true
+        }
+    } 
 </script>
 {% endblock %}

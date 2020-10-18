@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 import database as db
+from database import create_avil_bus_list
 from datetime import timedelta
 
 
@@ -73,7 +74,8 @@ def log_out():
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     if 'user_name' in session:
-        return render_template('index.html')
+        from_to_list = db.from_to_list()
+        return render_template('index.html', from_to_list=from_to_list)
     else:
         return redirect(url_for('sign_in'))
 
@@ -81,9 +83,22 @@ def index():
 # Avilable Bus List 
 @app.route('/bus-list', methods=['GET', 'POST'])
 def bus_list():
+    des_from = request.form.get("from")
+    des_to = request.form.get("to")
+    date = request.form.get("date")
+
+    print(des_from, des_to, date)
+
+    bus_list = create_avil_bus_list(des_from, des_to, date)
+    print(bus_list)
+    return render_template('bus_list.html',bus_list=bus_list)
+
+
+# My Tickets
+@app.route('/my-ticket', methods=['GET', 'POST'])
+def my_ticket():
     if request.method == 'GET':
-        loooop = [0,1,2,3,4,5,6,7,8,9]
-        return render_template('bus_list.html',loooop=loooop)
+        return render_template('my_ticket.html')
 
 
 # Main Function

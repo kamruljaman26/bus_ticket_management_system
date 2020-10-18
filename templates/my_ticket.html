@@ -1,31 +1,14 @@
 {% extends 'home_base.html' %}
 
-
 <!-- {#  Header Bloack  #} -->
 {% block header %}
-<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/bus_list.css') }}" />
-<title>Bus List</title>
-<style>
-    .bus-item-cl p {
-        font-size: 1em;
-        color: gray;
-    }
-
-    .bus-item-cl h4 {
-        color: cornflowerblue;
-        font-size: 1.5em;
-    }
-
-    .bus-item-cl {
-        padding: 15px;
-    }
-</style>
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+<title>Bus Booking</title>
 {% endblock %}
 
 
 <!-- Boday Bloack -->
 {% block body %}
-
 <!-- Navigaion Bar -->
 <nav class="navbar navbar-expand-md bg-light navbar-light">
     <!-- Logo TXT -->
@@ -39,10 +22,10 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <!-- Left Side -->
         <ul class="navbar-nav">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="{{url_for('index')}}">Home</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="{{url_for('my_ticket')}}">MyTicket</a>
             </li>
         </ul>
@@ -58,32 +41,17 @@
                 <a class="nav-link" href="{{url_for('log_out')}}">Sign-Out</a>
             </li>
         </ul>
+
     </div>
 </nav>
 
-<!-- Create Bus List -->
-<div class="container">
-    <h1 class="all-bus-header">All available bus list.</h1>
-    {% for x in bus_list %}
-    <!-- Create List -->
-    <div class="shadow-sm p-2 mb-3 bg-white rounded">
-        <!-- Create Bus Design -->
-        <div class="bus-item-cl" id="bus-item">
-            <h4>{{x[0]}}</h4>
-            <p> Bus Number: {{x[1]}} <br>
-                Starting Point: {{x[2]}} <br>
-                End Point: {{x[3]}} <br>
-                DEPARTURE TIME: {{x[4]}} <br>
-                ARRIVAL TIME: {{x[5]}} <br>
-                TICKET PRICE: {{x[7]}} TK
-            </p>
-        </div>
-    </div>
-    {% endfor %}
 
-</div>
 {% endblock %}
+
 
 <!-- Body Footer End -->
 {% block footer_js %}
+<script>
+
+</script>
 {% endblock %}

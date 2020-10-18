@@ -64,3 +64,38 @@ def login_validation(phone_num, password):
     else:
         message = "Username or Password is wrong, Please Try Again"
         return [False, message]
+
+
+# create FROM & TO List
+def from_to_list():
+    from_sql = "SELECT DISTINCT `form` FROM destination;"
+    to_sql = "SELECT DISTINCT `to` FROM destination;"
+    
+    my_cur = my_db.cursor()
+    my_cur.execute(from_sql)
+    from_list = my_cur.fetchall()
+
+    my_cur = my_db.cursor()
+    my_cur.execute(to_sql)
+    to_list = my_cur.fetchall()
+
+    from_to = {'from': [], 'to':[]}
+
+    for x in from_list:
+        from_to['from'].append(x[0])
+    
+    for x in to_list:
+        from_to['to'].append(x[0])
+
+    return from_to
+
+
+# Create Avilable Bus List
+def create_avil_bus_list(des_from, des_to, date='2020-10-18'):
+    sql = "SELECT bus_info.name, destination.bus_num,destination.form,destination.to, destination.start_date,destination.start_time,destination.duration,destination.price FROM destination INNER JOIN bus_info ON bus_info.bus_num=destination.bus_num AND destination.form=%s AND destination.to=%s AND destination.start_date=%s";
+    val = (des_from, des_to, date)
+
+    my_cur = my_db.cursor()
+    my_cur.execute(sql, val)
+    
+    return my_cur.fetchall();
